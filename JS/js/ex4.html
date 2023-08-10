@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style> select{margin: 10px 50px; }
+#bt {font-size: 120%; display: inline-block; border: 1px solid black}</style>
+<script>
+let villes = ['Beyrouth-C', 'Tripoli-N', 'Sidon-S', 'Tyr-S', 'Nabatieh-S', 'Chekka-N',
+'Jounieh-M', 'Zahlé-B', 'Baabda-M', 'Zgharta-N', 'Baalbek-B', 'Aley-M', 'Byblos-M',
+'Rayak-B', 'Marjayoun-S', 'Amioun-N', 'Jezzine-S', 'Rachaya-B', 'Hermel-B','Batroun-N',
+'Halba-N'];
+function creerListe(){
+			let listes = document.querySelectorAll("select");
+			let indice = 0;
+			for (let lt of listes){
+				remplir(lt, indice);
+				indice += 7;
+			}
+		}
+		function remplir(ref, indice){
+			let contenu = "";
+			let limit = indice + 7;
+			for (let i = indice; i <limit; i++){
+				contenu += "<option>"+ villes[i] + "</option>";
+			}
+			ref.innerHTML = contenu;
+		}
+    
+		function ajouter(lt){
+		    let ref = document.getElementById("tb");
+			let ind = lt.selectedIndex;
+			let op =lt.options[ind];
+			let val = op.textContent;
+			let tab = val.split("-");
+			let ligne = ref.insertRow(-1);
+			let cell = ligne.insertCell(); 
+            cell.textContent = tab[0];
+			cell = ligne.insertCell();
+			switch (tab[1]){
+						case 'C' : cell.textContent = "Capitale"; break;
+						case 'M' : cell.textContent = "Mont-Liban"; break;	
+						case 'S' : cell.textContent = "Sud-Liban"; break;
+						case 'N' : cell.textContent = "Nord-Liban"; break;	
+						case 'B' : cell.textContent = "Bekaa"; break;							
+			}
+		}
+		function supprimer(){
+			let ref = document.getElementById("tb");
+			let num = prompt("Numéro de ligne à supprimer ");
+			ref.deleteRow(parseInt(num));
+		}
+</script>
+</head>
+<body onload="creerListe();">
+<h2>Villes libanaises </h2>
+<div> <select name="liste1" id ="liste1" size = "7" onchange="ajouter(this)"></select>
+<select name="liste2" id ="liste2" size = "7" onchange="ajouter(this)"></select>
+<select name="liste2" id ="liste3" size = "7" onchange="ajouter(this)"></select>
+<input type ="button" value ="Supprimer une ligne" onclick="supprimer()"/> </div>
+<table border="1" id = "tb"> </table>
+</body>
+</html>

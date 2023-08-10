@@ -1,0 +1,100 @@
+<html>
+<head>
+<style> select{margin: 5px 50px; }
+
+#bt {font-size: 120%; display: inline-block; border: 1px solid black}
+
+</style>
+<script>
+    // An array of city names
+    let villes = ['Beyrouth', 'Tripoli', 'Sidon', 'Tyr', 'Nabatieh', 'Chekka',
+      'Jounieh', 'Zahlé', 'Baabda', 'Zgharta', 'Baalbek', 'Aley', 'Byblos',
+      'Rayak', 'Marjayoun', 'Amioun', 'Jezzine', 'Rachaya', 'Hermel', 'Batroun', 'Halba'];
+  
+    function creerListe() {
+     
+      
+      // Initialize an empty string to hold the options
+      var res = '';
+      
+      // Initialize the index variable for selecting groups of cities from the array
+      var indis = 0;
+  
+      // Loop three times to create three groups of cities
+      for (let i = 0; i <= 3; i++) {
+        // Initialize an empty string to hold the options for each group
+        var op = '';
+  
+        // Create options for each group by selecting 7 cities from the array
+        for (var j = indis; j <= indis + 6; j++) {
+          op = op + '<option>' + villes[j] + '</option>';
+        }
+  
+        // Determine the target select element based on the loop index
+       
+        remplir(i,op)
+        
+        // Append the options to the target select element
+       
+        
+        // Move the index to the next group of cities in the array
+        indis += 6;
+      }
+      // The function does not return anything (returns "undefined" by default)
+    }
+    function remplir(i,op){
+         // Get the first select element with id "liste1"
+      var list1 = document.getElementById("liste1");
+      
+      // Get the value of the second select element with id "liste2"
+      var list2 = document.getElementById("liste2")
+      
+      // Get the value of the third select element with id "liste3"
+      var list3 = document.getElementById("liste3")
+        if(i==0){
+            list1.innerHTML=op
+
+        }else if(i==3){
+            list2.innerHTML=op
+        }else{
+            list3.innerHTML=op
+        }
+    }
+    function creerRadio(){
+			let contenu ="";
+			let a = "A", z = "Z";
+			for (let i =a.charCodeAt(0); i <=z.charCodeAt(0); i++){
+			    let car = String.fromCharCode(i);
+				contenu += "<input type='radio' onclick='choisir(this)' ";
+				contenu += " name ='rb' value = '"+ car + "'>"+ car + " ";
+				if (car == 'M') contenu += "<br/>";
+			}
+			document.getElementById("bt").innerHTML = contenu;
+		}
+        function choisir(ref){
+			let listes = document.querySelectorAll("select");
+			for (let lt of listes){
+				selection(lt, ref.value);
+			}			
+		}
+		function selection(lt, lettre){
+			for (let op of lt.options){
+				let val = op.textContent;
+				if (val[0]==lettre) op.selected = true;
+				else op.selected = false;
+			}
+		}
+
+  </script>
+  
+</head>
+<body onload="creerListe(); creerRadio();">
+<h2>Villes libanaises </h2>
+<div>
+<select name="liste1" id ="liste1" size = "7" multiple></select>
+<select name="liste2" id ="liste2" size = "7" multiple></select>
+<select name="liste2" id ="liste3" size = "7" multiple></select>
+</div>
+<div id = "bt"> </div>
+</body>
+</html>

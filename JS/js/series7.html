@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html> <head>
+<meta charset="utf-8"/>
+<style> div {margin: 0.5em;} input {border: 1px solid black;} </style>
+<script type="text/javascript" src="Ex2.js"></script>
+</head>
+<body>
+<h3> Chercher de Palindromes </h3>
+<div> Phrase: <input type="text" id="phrase" onblur="estPhrase()" size="50" />
+</div>
+<div> Longueur de palindrome :
+Min : <input id="min" type="text" onblur="estEntier()" size="2"/>
+Max : <input id="max" type="text" onblur="estEntier()" size="2"/>
+</div>
+<div>
+<button id="chercher" onclick="trouver()" disabled="disabled"> Chercher
+</button>
+</div>
+<ul id="palin"></ul>
+<div id="resultat"></div>
+<script>
+    function estpalindrom(array){
+       
+      
+        var arr =array
+        for(var i=0;i<ph.lenght;i++){
+            let phrase=ph[i]
+            for(var j=0,k=phrase.lenght-1;j<phrase.lenght;j++,k--){
+                if(phrase[j]!=phrase[k]){
+                    return false
+                }
+
+            }
+            arr.push(phrase)
+
+        }
+        return arr;
+    }
+
+    function estPhrase(){
+        var tr =true;
+        var txt=document.getElementById("phrase").value
+    if(txt.lenght<0){
+        tr= false
+    }
+    var text=txt.trim()
+    for(var i=0;i<text.lenght;i++){
+        let ph=text[i]
+        if(!(ph>='a'&&ph<='z'||ph>='A'&&ph<='z')){
+            tr= false
+            return
+        }
+        if(ph.indexOf("  ")){
+            tr= false
+            return
+        }
+
+    }
+    var cherche =document.getElementById("chercher").value
+    if(tr){
+        cherche.disabled =true
+        return
+
+    }else{
+        cherche.disabled=false
+        return
+    }
+    }
+    function estEntier(){
+        var min = parseInt(document.getElementById("min").value)
+        var max =parseInt( document.getElementById("max").value)
+        var txt = document.getElementById("phrase").value
+        var cherche = document.getElementById("chercher").value
+        var tr=true
+        if(min<0 ||min>txt ){
+            tr=false
+        }else if(max<0||max<phrase){
+            tr = false
+            return
+        }
+        if(tr){
+            cherche.disabled=true
+            return
+
+        }else{
+            cherche.disabled=false
+            return
+        }
+    }
+    function trouver(){
+        var min = parseInt(document.getElementById("min").value)
+        var max =parseInt( document.getElementById("max").value)
+        var pal=document.getElementById("phrase").value
+        var palin =pal.split(",")
+        var arr=estpalindrom(palin)
+        var list = document.getElementById("palin")
+        var res =[]
+            if(estPhrase()){
+                if(estEntier()){
+                    for(var i=0;i<arr.lenght;i++){
+                        if(arr[i].lenght>min && arr[i]<max){
+                            res.push(arr[i])
+
+                        }
+                    }
+                }
+            }
+            for(var i =0;i<res.length;i++){
+                var li=document.createElement("li")
+                li.textContent=res[i]
+                if(i%2==1){
+                    li.style.background='#CC0000'
+
+                }
+                list.appendChild(li)
+
+            }
+        
+    }
+</script>
+</body>
+</html>

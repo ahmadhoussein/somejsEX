@@ -1,0 +1,146 @@
+<!-- <!DOCTYPE HTML>
+<html>
+<head>
+<style> div {margin: 10px;}
+input[type=button], #res {font-size: 130%; color: white; background-color: blue;}
+</style><script>
+ function calculer(b){
+			let val1 = Number(document.getElementById("v1").value);
+			let val2 = Number(document.getElementById("v2").value);
+			let op = (b.value).trim();
+			let res=0;
+			switch (op){
+				case '+' : res = val1 + val2; break;
+				case '-' : res = val1 - val2; break;
+				case '*' : res = val1 * val2; break;
+				case '/' : res = val1 / val2; break;				
+			}
+			res = Math.round(res*100)/100;
+			let ref = document.getElementById("res");
+			ref.innerHTML = "Resultat : " + val1 + " " + op +" " + val2 + " = " + res;
+		}
+ </script>
+</head>
+<body>
+<h2>Opérations arithmetiques </h2>
+<div>Valeur1 <input id = "v1"/> Valeur2 <input id = "v2" /></div>
+<div><input type = "button" value =" + " onclick = "calculer(this)"/>&emsp;
+<input type = "button" value =" - " onclick = "calculer(this)"/>&emsp;
+<input type = "button" value =" * " onclick = "calculer(this)"/>&emsp;
+<input type = "button" value =" / " onclick = "calculer(this)"/> </div>
+<div id = "res"> </div>
+
+</body>
+</html> -->
+<!-- <!DOCTYPE HTML>
+<html>
+<head>
+<style>
+div {margin: 5px;}
+#res {font-size: 130%; padding: 5px;}
+.res1 {color: white; background-color: blue;}
+.res2 {color: white; background-color: red;}
+</style>
+<script>
+</script>
+</head>
+<body>
+<h2>Poids idéal</h2>
+<div>Votre Age <input id = "age"/> &emsp;Votre Taille(cm) <input id = "taille"/></div>
+<div>Homme <input type="radio" name = "genre" id = "h" checked="checked"/>
+Femme <input type="radio" name = "genre" id = "f"/>
+&emsp; Votre poids actuel <input id = "poids"/></div>
+<div><input type = "button" value ="Calculer Poids idéal" onclick = "calculPoids()"/></div>
+<div class = "x" id = "res">
+</div>
+<script>
+    function calculPoids(){
+        var h = document.getElementById("h")
+        var f = document.getElementById("f")
+        var age = parseInt(document.getElementById("age").value)
+        var taill = parseFloat(document.getElementById("taille").value)
+    var div=document.getElementById("res");
+        var poids = parseFloat(document.getElementById("poids").value)
+        var res;
+        if(h.checked){
+            res=Math.round(3*taill-250)*(age+270)/1200
+
+        }else if(f.checked){
+            res=Math.round(taill/2-30)*(180+age)/200
+        }else{
+            res="errorrrrrrr"
+        }
+        div.innerHTML=res
+        div.style.background='red'
+    
+    
+    }
+</script>
+</body>
+</html>
+
+<!-- <html> -->
+    <html>
+        <head>
+<style> select{margin: 5px 50px; }
+
+#bt {font-size: 120%; display: inline-block; border: 1px solid black}
+
+</style>
+<script>
+    // An array of city names
+    let villes = ['Beyrouth', 'Tripoli', 'Sidon', 'Tyr', 'Nabatieh', 'Chekka',
+      'Jounieh', 'Zahlé', 'Baabda', 'Zgharta', 'Baalbek', 'Aley', 'Byblos',
+      'Rayak', 'Marjayoun', 'Amioun', 'Jezzine', 'Rachaya', 'Hermel', 'Batroun', 'Halba'];
+  
+    function creerListe() {
+      // Get the first select element with id "liste1"
+      var list1 = document.getElementById("liste1");
+      
+      // Get the value of the second select element with id "liste2"
+      var list2 = document.getElementById("liste2").value;
+      
+      // Get the value of the third select element with id "liste3"
+      var list3 = document.getElementById("liste3").value;
+      
+      // Initialize an empty string to hold the options
+      var res = '';
+      
+      // Initialize the index variable for selecting groups of cities from the array
+      var indis = 0;
+  
+      // Loop three times to create three groups of cities
+      for (let i = 0; i <= 3; i++) {
+        // Initialize an empty string to hold the options for each group
+        var op = '';
+  
+        // Create options for each group by selecting 7 cities from the array
+        for (var j = indis; j <= indis + 7; j++) {
+          op = op + '<option>' + villes[j] + '</option>';
+        }
+  
+        // Determine the target select element based on the loop index
+        var list = 'list' + i;
+        var list1 = document.getElementById(list);
+        
+        // Append the options to the target select element
+        list1.appendChild(op);
+        
+        // Move the index to the next group of cities in the array
+        indis += 7;
+      }
+      // The function does not return anything (returns "undefined" by default)
+    }
+  </script>
+  
+</head>
+<body onload="creerListe(); creerRadio();">
+<h2>Villes libanaises </h2>
+<div>
+<select name="liste1" id ="liste1" size = "7" multiple></select>
+<select name="liste2" id ="liste2" size = "7" multiple></select>
+<select name="liste2" id ="liste3" size = "7" multiple></select>
+</div>
+<div id = "bt"> </div>
+</body>
+</html>
